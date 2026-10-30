@@ -10,3 +10,25 @@ If it has, what might explain the shift?
 - Period: 2000 to present
 - Out of scope for now: entitlements, northern basin
 
+## Data
+Source: ABARES, Murray-Darling Basin Water Market Catchment Dataset 2021
+(Supply tables), CC BY 4.0. https://doi.org/10.25814/wvk8-5n34
+
+- Panel data: one row per region per financial year (2001 = 2000-01)
+- Southern regions kept (9): NSW Lower Darling, NSW Murray Above,
+  NSW Murray Below, NSW Murrumbidgee, SA Murray, VIC Goulburn-Broken,
+  VIC Loddon-Campaspe, VIC Murray Above, VIC Murray Below
+
+Key variables:
+- P: average allocation price, $/ML, real 2019-20 dollars (target)
+- R: annual rainfall, mm (August to May)
+- a_High, a_Low: allocation %, high and low reliability
+- C_High, C_Low: carryover from previous year, ML
+- D_High, D_Low: share of entitlements recovered for the environment
+- T_Irrig: net allocation trade into the region, ML
+
+Data issues:
+- No dam storage variable: allocation % is used as the supply measure
+- C_High is negative in some NSW years (small values): to document
+- Environmental columns (F_Env, G_Env, C_Env) are mostly empty: not used
+- Entitlement volumes (E_*) are fixed at 2020-21 levels: not a time-varying driver
