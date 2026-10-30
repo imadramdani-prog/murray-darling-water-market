@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# macOS and Excel temporary files
+.DS_Store
+~$*
