@@ -32,3 +32,18 @@ Data issues:
 - C_High is negative in some NSW years (small values): to document
 - Environmental columns (F_Env, G_Env, C_Env) are mostly empty: not used
 - Entitlement volumes (E_*) are fixed at 2020-21 levels: not a time-varying driver
+
+## Roadmap
+
+Version 1 (2001-2021, ABARES data)
+- Panel regression with region fixed effects
+- Structural break test at 2016 (Chow test)
+- Out-of-sample test: train on 2001-2016, predict 2017-2021
+- Effective allocation = allocation x (1 - environmental share)
+- Compare results with ABARES estimates (related work)
+
+Version 2 (main new contribution)
+- Extend the data beyond 2021 to the present
+- Test whether the post-2016 price premium persists in later years
+- Interactive dashboard with a scenario simulator
+- Price scenarios for next season (dry, average, wet)
