@@ -222,3 +222,4 @@ __marimo__/
 # macOS and Excel temporary files
 .DS_Store
 ~$*
+data/raw/Allocation_Trades.csv
