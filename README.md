@@ -79,7 +79,7 @@ June (2026 = July 2025 to June 2026).
 | Rainfall | [SILO](https://www.longpaddock.qld.gov.au/silo/) (Queensland Government), one town per region | 2008-2026 |
 
 The 2022-2027 allocations and carryover, with the source of each value, are in
-`data/raw/supply_2022_2027.csv`. The BOM trade file (128 MB) is not stored in the repository: download
+`data/raw/supply_2022_2027.csv`. A few carryover values are estimated, as noted in that file. The BOM trade file (128 MB) is not stored in the repository: download
 it from the dashboard ("Download data (Full Extract)") into `data/raw/Allocation_Trades.csv`.
 
 ## Method
@@ -117,18 +117,6 @@ it from the dashboard ("Download data (Full Extract)") into `data/raw/Allocation
 This project agrees that environmental recovery explains part of the premium. The rest is not explained
 by allocations, rainfall or carryover. Possible drivers include demand from permanent crops and investor
 behaviour, which public data do not allow to test: trade records do not say who buys and who holds water.
-
-## Limitations
-
-- Annual data: tests after 2016 rest on few observations per region.
-- The period indicators capture everything that changed after 2016, not one specific cause.
-- Demand drivers (crop mix, commodity prices) are not in the model.
-- From 2022, entitlements and the environmental share are held at 2020-21 levels.
-- Some 2022-2026 carryover values are estimated (Victorian Murray 2023-2024, Loddon-Campaspe 2026).
-- In NSW, 2022-2027 allocations are credited volumes divided by entitlements, slightly below announced
-  allocations in wet years.
-- 2026-27 is a partial year (prices August-November 2026, allocations announced by early November).
-- Results show associations, not causal effects.
 
 ## Author
 
