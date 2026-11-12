@@ -9,9 +9,7 @@ tests whether the same fundamentals still explain prices after 2016, and extends
 **Live dashboard:** [murray-darling-water-market.streamlit.app](https://murray-darling-water-market.streamlit.app)
 (price history, actual vs predicted prices, 2026-28 forecast and a price simulator).
 
-## Key findings
-
-**Version 1 (ABARES data, 2001-2021)**
+## Version 1: 2001-2021 (ABARES data)
 
 - **Prices follow water scarcity.** They peaked during the Millennium Drought (about AUD 690/ML in 2008),
   fell to about AUD 25/ML after the 2010-11 floods, and rose again in the 2017-2019 drought
@@ -19,12 +17,24 @@ tests whether the same fundamentals still explain prices after 2016, and extends
 - **After 2016, water costs about 90% more at comparable conditions.** Holding allocations, rainfall,
   carryover and region constant, prices are about 91% higher in 2017-2021 (panel regression with region
   fixed effects, p < 0.001 with year-clustered standard errors).
-- **A model trained on 2001-2016 underpredicts 2017-2021 prices by about 91% on average.**
+- **A model trained on 2001-2016 underpredicts 2017-2021 prices by about 91% on average**, with the
+  largest gaps in the 2019 and 2020 drought years.
 - **The level of prices changed, not their sensitivity to water** (Chow-type test on slopes, p = 0.16).
 - **Environmental water recovery explains about one third of the premium**: using effective allocations
   (net of entitlements held for the environment) reduces it from about 91% to about 56%.
 
-**Version 2 (data extended to 2026)**
+![Water allocation prices, 2001-2021](figures/price_trend.png)
+
+![Actual vs predicted prices, 2017-2021](figures/out_of_sample.png)
+
+| Model (2001-2021) | Post-2016 effect | R² |
+|---|---|---|
+| Allocations, rainfall, carryover | +90% | 0.56 |
+| + region fixed effects | +91% | 0.67 |
+| Effective allocations instead of raw allocations | +56% | 0.66 |
+| Out-of-sample: actual vs predicted, 2017-2021 | +91% | 0.69 (training) |
+
+## Version 2: extension to 2026
 
 - **The new price series matches ABARES.** Prices rebuilt from Bureau of Meteorology trade records track
   ABARES closely over 2009-2021 (correlation 0.99, median gap -0.4%, 108 region-years).
@@ -36,11 +46,21 @@ tests whether the same fundamentals still explain prices after 2016, and extends
   AUD 92/ML (wet year), 204 (average) and 357 (dry) for 2026-27. The actual average price for
   August-November 2026 is AUD 231/ML, between the average and dry scenarios.
 
-![Price history and scenario A forecast](figures/forecast_2027.png)
+![Overlap check: ABARES vs BOM prices, 2009-2021](figures/overlap_check.png)
 
 ![Actual vs predicted prices, 2017-2026](figures/out_of_sample_2026.png)
 
-![Overlap check: ABARES vs BOM prices, 2009-2021](figures/overlap_check.png)
+![Price history and scenario A forecast](figures/forecast_2027.png)
+
+| Extended model (2001-2026) | Premium vs 2001-2016 | R² |
+|---|---|---|
+| 2017-2021 | +96% | 0.63 |
+| 2022-2026 | +88% | 0.63 |
+
+| Scenario A forecast (AUD/ML, 2019-20 dollars) | Wet | Average | Dry |
+|---|---|---|---|
+| 2026-27 | 92 | 204 | 357 |
+| 2027-28 | 90 | 207 | 565 |
 
 All prices are in real 2019-20 Australian dollars per megalitre (ML). Years are water years ending in
 June (2026 = July 2025 to June 2026).
@@ -82,21 +102,6 @@ it from the dashboard ("Download data (Full Extract)") into `data/raw/Allocation
    region's 10th, 50th and 90th percentile of rainfall and allocations (dry, average, wet), with 2026-27
    allocations no lower than those already announced.
 5. **Dashboard** (`app.py`, Streamlit).
-
-## Results
-
-| Model | Post-2016 effect | R² |
-|---|---|---|
-| Allocations, rainfall, carryover (2001-2021) | +90% | 0.56 |
-| + region fixed effects | +91% | 0.67 |
-| Effective allocations instead of raw allocations | +56% | 0.66 |
-| Extended model (2001-2026): premium 2017-2021 | +96% | 0.63 |
-| Extended model (2001-2026): premium 2022-2026 | +88% | 0.63 |
-
-| Scenario A forecast (AUD/ML, 2019-20 dollars) | Wet | Average | Dry |
-|---|---|---|---|
-| 2026-27 | 92 | 204 | 357 |
-| 2027-28 | 90 | 207 | 565 |
 
 ## Related work
 
