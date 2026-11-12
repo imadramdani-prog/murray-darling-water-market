@@ -130,19 +130,6 @@ behaviour, which public data do not allow to test: trade records do not say who 
 - 2026-27 is a partial year (prices August-November 2026, allocations announced by early November).
 - Results show associations, not causal effects.
 
-## Reproduce
-
-```bash
-git clone https://github.com/imadramdani-prog/murray-darling-water-market.git
-cd murray-darling-water-market
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-Download the BOM trade file (see Data), then run the notebooks in order (01 to 04). In notebook 03, put
-your email address in the SILO cell (`EMAIL = "YOUR_EMAIL"`): SILO uses it as a username. Launch the dashboard with `streamlit run app.py`.
-
 ## Author
 
 Imad Ramdani, BBA student in Finance and Data Science, HEC Montréal.
