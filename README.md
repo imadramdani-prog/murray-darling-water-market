@@ -14,6 +14,12 @@ tests whether the same fundamentals still explain prices after 2016, and extends
 - **Prices follow water scarcity.** They peaked during the Millennium Drought (about AUD 690/ML in 2008),
   fell to about AUD 25/ML after the 2010-11 floods, and rose again in the 2017-2019 drought
   (about AUD 525/ML in 2020).
+- **Allocations drive prices.** A simple linear regression of log price on high-reliability allocations
+  shows that a 10-point drop in allocations raises the price by about 25%; allocations alone explain
+  about 21% of price variation (R² = 0.21).
+- **At full allocations, water already cost twice as much after 2016**: when high-reliability
+  allocations were 95% or more, the average price was about AUD 122/ML in 2001-2016 and AUD 229/ML
+  in 2017-2021.
 - **After 2016, water costs about 90% more at comparable conditions.** Holding allocations, rainfall,
   carryover and region constant, prices are about 91% higher in 2017-2021 (panel regression with region
   fixed effects, p < 0.001 with year-clustered standard errors).
@@ -29,8 +35,9 @@ tests whether the same fundamentals still explain prices after 2016, and extends
 
 | Model (2001-2021) | Post-2016 effect | R² |
 |---|---|---|
-| Allocations, rainfall, carryover | +90% | 0.56 |
-| + region fixed effects | +91% | 0.67 |
+| Simple linear regression: log price on high-reliability allocation | – | 0.21 |
+| Multiple linear regression (OLS): allocations, rainfall, carryover, post-2016 indicator | +90% | 0.56 |
+| + region fixed effects (year-clustered standard errors, p < 0.001) | +91% | 0.67 |
 | Effective allocations instead of raw allocations | +56% | 0.66 |
 | Out-of-sample: actual vs predicted, 2017-2021 | +91% | 0.69 (training) |
 
@@ -84,12 +91,25 @@ it from the dashboard ("Download data (Full Extract)") into `data/raw/Allocation
 
 ## Method
 
-1. **Exploration** (`notebooks/01_explore.ipynb`): southern regions, price trends, before and after 2016.
-2. **Version 1 models** (`notebooks/02_model.ipynb`): OLS of log price on high and low reliability
-   allocations, log rainfall, carryover share and a post-2016 indicator, with region fixed effects and
-   year-clustered standard errors; Chow-type test; out-of-sample test (train 2001-2016, predict
-   2017-2021); effective allocations.
-3. **Extending the data** (`notebooks/03_extend.ipynb`):
+**Version 1 (2001-2021)**
+
+1. **Exploration** (`notebooks/01_explore.ipynb`): southern regions, price trends, price vs allocation,
+   before and after 2016 (including prices at near-full allocations).
+2. **Data preparation** (`notebooks/01_explore.ipynb`): model variables only, small negative carryover
+   values set to zero, log price, post-2016 indicator, carryover share and effective allocations.
+   Saved to `data/processed/model_data.csv`.
+3. **Models** (`notebooks/02_model.ipynb`), step by step:
+   - Simple linear regression: log price on high-reliability allocation
+   - Multiple linear regression (OLS): high and low reliability allocations, log rainfall, carryover
+     share and a post-2016 indicator
+   - Same model with region fixed effects and year-clustered standard errors
+   - Chow-type test: do the slopes differ after 2016?
+   - Out-of-sample test: train on 2001-2016, predict 2017-2021
+   - Same model with effective allocations (net of environmental holdings)
+
+**Version 2 (extension to 2026)**
+
+4. **Extending the data** (`notebooks/03_extend.ipynb`):
    - BOM trades: southern MDB, surface water, prices between AUD 5 and 2,000/ML (237,808 trades kept);
      trading zones mapped to the 9 ABARES regions.
    - Prices rebuilt with the ABARES method: monthly volume-weighted prices, averaged over August to May,
@@ -97,11 +117,11 @@ it from the dashboard ("Download data (Full Extract)") into `data/raw/Allocation
    - Rainfall summed over August to May and scaled to ABARES levels for each region
      (correlation with ABARES 0.95).
    - Everything combined into `data/processed/panel_2001_2027.csv`.
-4. **Extended model and forecast** (`notebooks/04_extended_model.ipynb`): separate premiums for 2017-2021
+5. **Extended model and forecast** (`notebooks/04_extended_model.ipynb`): separate premiums for 2017-2021
    and 2022-2026; out-of-sample test to 2026; scenario A forecast for 2026-27 and 2027-28 using each
    region's 10th, 50th and 90th percentile of rainfall and allocations (dry, average, wet), with 2026-27
    allocations no lower than those already announced.
-5. **Dashboard** (`app.py`, Streamlit).
+6. **Dashboard** (`app.py`, Streamlit).
 
 ## Related work
 
